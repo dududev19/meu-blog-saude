@@ -1,3 +1,4 @@
+import './App.css';
 import React from 'react';
 import IMCCalculator from './components/IMCCalculator';
 import WaterCalculator from './components/WaterCalculator';
