@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
+
 function WaterCalculator() {
   const [peso, setPeso] = useState('');
-  const [atividade, setAtividade] = useState('moderada');
-  const [aguaDiaria, setAguaDiaria] = useState(null);
+  const [agua, setAgua] = useState(null);
+
   const calcularAgua = () => {
     if (peso) {
-      let baseAgua = peso * 0.03;
-      if (atividade === 'moderada') baseAgua *= 1.2;
-      if (atividade === 'alta') baseAgua *= 1.5;
-      setAguaDiaria(baseAgua.toFixed(2));
-    } else {
-      alert('Por favor, insira o peso.');
+      const valor = (peso * 35 / 1000).toFixed(2); // litros/dia
+      setAgua(valor);
     }
   };
+
   return (
     <div>
-      <input type="number" placeholder="Peso (kg)" onChange={(e) => setPeso(e.target.value)} />
-      <select onChange={(e) => setAtividade(e.target.value)}>
-        <option value="baixa">Atividade Baixa</option>
-        <option value="moderada">Atividade Moderada</option>
-        <option value="alta">Atividade Alta</option>
-      </select>
+      <input
+        type="number"
+        placeholder="Peso (kg)"
+        value={peso}
+        onChange={(e) => setPeso(e.target.value)}
+      />
       <button onClick={calcularAgua}>Calcular Consumo de Água</button>
-      {aguaDiaria && <p>Você deve beber aproximadamente {aguaDiaria} litros por dia.</p>}
+
+      {agua && <p>Você deve beber aproximadamente {agua} litros de água por dia.</p>}
     </div>
   );
 }
+
 export default WaterCalculator;
+

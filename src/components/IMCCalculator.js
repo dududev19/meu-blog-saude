@@ -1,32 +1,36 @@
-import React from 'react';
-import IMCCalculator from './components/IMCCalculator';
-import WaterCalculator from './components/WaterCalculator';
-function App() {
+import React, { useState } from 'react';
+
+function IMCCalculator() {
+  const [peso, setPeso] = useState('');
+  const [altura, setAltura] = useState('');
+  const [imc, setImc] = useState(null);
+
+  const calcularIMC = () => {
+    if (peso && altura) {
+      const valor = (peso / (altura * altura)).toFixed(2);
+      setImc(valor);
+    }
+  };
+
   return (
-    <div className="App">
-      <header>
-        <h1>Blog de Saúde e Bem-Estar</h1>
-        <nav>
-          <ul>
-            <li><a href="#imc">Calculadora de IMC</a></li>
-            <li><a href="#agua">Calculadora de Água</a></li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <section id="imc">
-          <h2>Calculadora de IMC</h2>
-          <IMCCalculator />
-        </section>
-        <section id="agua">
-          <h2>Calculadora de Consumo de Água</h2>
-          <WaterCalculator />
-        </section>
-      </main>
-      <footer>
-        <p>© 2023 Seu Blog de Saúde</p>
-      </footer>
+    <div>
+      <input
+        type="number"
+        placeholder="Peso (kg)"
+        value={peso}
+        onChange={(e) => setPeso(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="Altura (m)"
+        value={altura}
+        onChange={(e) => setAltura(e.target.value)}
+      />
+      <button onClick={calcularIMC}>Calcular IMC</button>
+
+      {imc && <p>Seu IMC é: {imc}</p>}
     </div>
   );
 }
-export default App;
+
+export default IMCCalculator;
